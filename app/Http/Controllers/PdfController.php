@@ -17,11 +17,11 @@ class PdfController extends Controller
 {
    public function generatePdf(){
 
-    $products= Product::get();
+    $lc=LigneCommande::get();
         $data = [
-            'title' => 'Welcome to Funda of Web IT - fundaofwebit.com',
+            'title' => 'Facture de laivraison ',
             'date' => date('d/m/Y'),
-            'products' =>  $products
+            'lc' =>  $lc
         ];
 
         $pdf = PDF::loadView('admin.products.generate-product-pdf', $data);

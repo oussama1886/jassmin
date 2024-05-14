@@ -13,19 +13,23 @@
     <table class="table table-bordered">
     <thead>
         <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>price</th>
+            <th>Id commande</th>
+            <th>produit</th>
+            <th>quantite</th>
+            <th>taille</th>
+            <th>couleur</th>
         </tr>
     </thead>
     <tbody>
-        @foreach ($products as $item )
+        @foreach ($lc as $item )
 
 
         <tr>
-<th> {{ $item->id }}</th>
-<th> {{ $item->name }}</th>
-<th> {{ $item->price }}</th>
+<th> {{ $item->commande_id }}</th>
+<th> {{ $item->product_id }}</th>
+<th> {{ $item->qte }}</th>
+<th> @if ( $item->size =='null'||$item->size =='')  --  @else {{ $item->size }} @endif </th>
+<th> @if ( $item->color =='null'||$item->color =='')  --  @else {{ $item->color }} @endif </th>
         </tr>
         @endforeach
     </tbody>
