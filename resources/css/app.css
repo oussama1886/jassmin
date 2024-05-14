@@ -1,0 +1,10 @@
+.table {
+    background-image: radial-gradient(circle, #ffffff 1px, transparent 1px);
+    background-size: 20px 20px; /* Taille des points */
+}
+
+.login-button {
+    text-align: center; /* Centrer le bouton horizontalement */
+    margin-bottom: 20px; /* Ajouter un espace en bas du bouton */
+}
+
