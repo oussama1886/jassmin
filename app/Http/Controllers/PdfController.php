@@ -15,16 +15,26 @@ use Barryvdh\DomPDF\Facade\Pdf;
 
 class PdfController extends Controller
 {
-   public function generatePdf(){
+    public function generatePdf(Request $request)
+    {
+        $commande_id = $request->input('commande_id');
 
-    $lc=LigneCommande::get();
+        // Récupérer les lignes de commande de la commande spécifique
+        $lc = LigneCommande::where('commande_id', $commande_id)->get();
+
+        // Récupérer d'autres données nécessaires comme le titre, la date, etc.
+        $commande = Commande::findOrFail($commande_id);
         $data = [
-            'title' => 'Facture de laivraison ',
+            'title' => 'Facture de livraison',
             'date' => date('d/m/Y'),
-            'lc' =>  $lc
+            'lc' =>  $lc,
+            // Ajoutez d'autres données ici si nécessaire
         ];
 
+        // Charger la vue PDF avec les données
         $pdf = PDF::loadView('admin.products.generate-product-pdf', $data);
+
+        // Télécharger le PDF avec le nom "facture.pdf"
         return $pdf->download('facture.pdf');
-   }
+    }
 }

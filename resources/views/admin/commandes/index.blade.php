@@ -81,7 +81,7 @@
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th> numero de commande</th>
+                        <th> n commande</th>
                         <th>Total</th>
                         <th>Etat</th>
                         <th>Client id </th>
@@ -91,6 +91,7 @@
                         <th>addresse  </th>
                         <th>email  </th>
                         <th>Date</th>
+                        <th>Facture laivraison</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -116,6 +117,9 @@
                             <td>{{ $commande->delivery_address }}</td>
                             <td>{{ $commande->emaildel }}</td>
                             <td>{{ $commande->created_at }}</td>
+                            <td><a href="{{ route('generatePdf', ['commande_id' => $commande->id, 'client_id' => $commande->client_id]) }}" class="btn btn-info">generer</a></td>
+
+
                         </tr>
                         @endforeach
                 </tbody>

@@ -63,7 +63,7 @@ Route::get('/client/profile','App\Http\Controllers\ClientController@profile');
 Route::post('/client/Profile/update', 'App\Http\Controllers\clientController@updateProfile')->middleware('auth');
 Route::post('/client/Profile/updat-password', 'App\Http\Controllers\clientController@updatePassword')->middleware('auth');
 
-Route::get('generate-pdf', [App\Http\Controllers\PdfController::class,'generatePdf'])->name('generatePdf');
+Route::get('/generate-pdf', [App\Http\Controllers\PdfController::class, 'generatePdf'])->name('generatePdf');
 
 Route::get('/home', 'App\Http\Controllers\ProductController@index');
 
