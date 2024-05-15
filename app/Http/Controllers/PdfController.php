@@ -8,10 +8,12 @@ use App\Models\LigneCommande;
 use App\Models\Product;
 use App\Models\Review;
 use App\Models\SizeColor;
+use App\Models\User;
+use Barryvdh\DomPDF\Facade\Pdf;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Barryvdh\DomPDF\Facade\Pdf;
 
 class PdfController extends Controller
 {
@@ -24,11 +26,20 @@ class PdfController extends Controller
 
         // Récupérer d'autres données nécessaires comme le titre, la date, etc.
         $commande = Commande::findOrFail($commande_id);
+       // Récupérer l'ID de l'utilisateur associé à la commande
+      $Iduser = Commande::where('id', $commande_id)->pluck('client_id');
+
+     // Récupérer le nom de l'utilisateur en utilisant son ID
+      $user = User::where('id', $Iduser)->pluck('name');
+
+
         $data = [
             'title' => 'Facture de livraison',
             'date' => date('d/m/Y'),
+            'commande_id'=>$commande_id,
+            'commande'=>$commande,
             'lc' =>  $lc,
-            // Ajoutez d'autres données ici si nécessaire
+            'user_name'=>$user,
         ];
 
         // Charger la vue PDF avec les données
