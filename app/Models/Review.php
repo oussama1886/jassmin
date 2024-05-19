@@ -18,4 +18,9 @@ class Review extends Model
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
+
+    public static function averageRateForProduct($product_id)
+    {
+        return self::where('product_id', $product_id)->avg('rate');
+    }
 }

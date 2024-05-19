@@ -10,13 +10,12 @@ use App\Models\SizeColor;
 
 class GuestController extends Controller
 {
-   public function home() {
-    $produits=Product::paginate(12);//recuperer tout les produits de la base de donnes
-    $categories=category::all();//recuperer tout les categorie de la base de donnes
-    //return view('home',compact('produits')); //passer ces données à ma vue 'home'
-    return view('guest.home', compact('produits'),compact('categories'));
-
+    public function home() {
+        $produits = Product::where('qte', '>', 0)->paginate(12); // Retrieve all products from the database where quantity > 0
+        $categories = Category::all(); // Retrieve all categories from the database
+        return view('guest.home', compact('produits', 'categories')); // Pass these data to the 'home' view
     }
+
 
     public function productDetails($id) {
 

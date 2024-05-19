@@ -82,15 +82,30 @@
             <div class="col-lg-7 pb-5">
                 <h3 class="font-weight-semi-bold">{{$product->name}}</h3>
                 <div class="d-flex mb-3">
-                    <div class="text-primary mb-2">
-                        <!-- a revoir pour afficher la moyenne des etoile pour chque produits-->
-                        @for ($i =0 ; $i <count($product->reviews) ; $i++)
+                  <!-- Dans votre vue -->
+<!-- Dans votre vue -->
+<!-- Dans votre vue -->
+<div class="text-primary mb-2">
+    @php
+    $averageRate = \App\Models\Review::averageRateForProduct($product->id);
+    @endphp
 
-                           <i class="fas fa-star"></i>
-                        @endfor
+    @if($averageRate !== null)
+        Moyenne des notes :
+        @for ($i = 1; $i <= 5; $i++)
+            @if ($i <= $averageRate)
+                <i class="fas fa-star"></i>
+            @else
+                <i class="far fa-star"></i>
+            @endif
+        @endfor
+    @else
+        Ce produit n'a pas encore été noté.
+    @endif
+</div>
 
 
-                    </div>
+
                     <small class="pt-1">{{ count($product->reviews) }} Avis</small>
                 </div>
                 <h3 class="font-weight-semi-bold mb-4">{{$product->price}} TND</h3><h6 class="text-muted ml-2"><del>@if ($product->old_price){{$product->old_price}} TND @endif</del></h6>
@@ -319,7 +334,17 @@
                                 <h4 class="mb-4">{{ count($product->reviews) }} Avis</h4>
                                 @foreach($product->reviews as $review)
                                 <div class="media mb-4">
-                                    <img  src="{{asset('mainassets/img/user.jpg')}}" alt="Image" class="img-fluid mr-3 mt-1" style="width: 45px;">
+
+
+                                  {{--   photo --}}
+                                    {{-- <img  src="{{asset('mainassets/img/user.jpg')}}" alt="Image" class="img-fluid mr-3 mt-1" style="width: 45px;"> --}}
+                                    @if(!empty(auth()->user()->photo))
+                         {{--            <img class="rounded-circle" src="{{ asset('dashassets/img/client/'. auth()->user()->photo) }}" alt="User-Profile-Image" width="60" height="60"> --}}
+                         <img class="rounded-circle" src="{{ asset('dashassets/img/client/'. $review->user->photo) }}" alt="User-Profile-Image" width="60" height="60">
+                                    @else
+                                    <!-- Photo standard -->
+                                    <img class="rounded-circle" src="{{ asset('dashassets/img/client/profile.png') }}" alt="User-Profile-Image" width="60" height="60">
+                                    @endif
                                     <div class="media-body">
                                         <h6>{{ $review->user->name }}<small> - <i>{{ $review->created_at }}</i></small></h6>
                                         <div class="text-primary mb-2">
@@ -336,15 +361,22 @@
                             </div>
                             <div class="col-md-6">
                                 <h4 class="mb-4">Leave a review</h4>
-                                <small>Your email address will not be published. Required fields are marked *</small>
+                                <small>Your email address will not be published. Required fields are marked *<i class="fas fa-star"></i></small>
 
                                 <form action="/client/review/store" method="POST">
                                     @csrf
                                     <input type="hidden"  value="{{$product->id }}" name="product_id">
-                                <div class="form-group">
-                                    <label class="mb-0 mr-2" for="rating">Votre évaluation * :</label>
-                                    <input type="number" max="5" min="1" class="form-control small-rating" name="rate" />
-                                </div>
+                                    <div class="form-group">
+                                        <label class="mb-0 mr-2" for="rating">Votre évaluation * :</label>
+                                        <select id="star-rating" class="form-control small-rating" name="rate">
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                        </select>
+                                    </div>
+
 
 
 

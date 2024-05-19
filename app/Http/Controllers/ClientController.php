@@ -12,6 +12,7 @@ use App\Models\SizeColor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class ClientController extends Controller
 {
@@ -138,19 +139,38 @@ public function updatePassword(Request $request)
     // Rediriger l'utilisateur avec un message de succès
     return view('client.dashboard')->with('success', 'Profile updated successfully!');
 }
-public function addReview(Request $request){
+public function addReview(Request $request)
+{
+    // Validation des données d'entrée
+    $validator = Validator::make($request->all(), [
+        'rate' => 'required|integer|min:1|max:5',
+        'product_id' => 'required|integer|exists:products,id',
+        'content' => 'required|string|max:1000',
+    ]);
 
-//dd($request);
+    // Vérification si la validation échoue
+    if ($validator->fails()) {
+        return redirect()->back()
+                         ->withErrors($validator)
+                         ->withInput();
+    }
 
-$review=new Review();
-$review->rate=$request->rate;
-$review->product_id=$request->product_id;
-$review->content=$request->content;
-$review->user_id=Auth::user()->id;
-$review->save();
-//dd($request);
-return redirect()->back();
+    // Création et sauvegarde de la nouvelle revue
+    $review = new Review();
+    $review->rate = $request->rate;
+    $review->product_id = $request->product_id;
+    $review->content = $request->content;
+    $review->user_id = Auth::user()->id;
+    $review->save();
+
+    // Calculer la moyenne des notes pour ce produit
+    $averageRate = Review::where('product_id', $request->product_id)->avg('rate');
+
+    // Rediriger vers la page précédente avec la moyenne des notes
+    return redirect()->back()->with('averageRate', $averageRate);
 }
+
+
 
 /* public function cart()
 {
