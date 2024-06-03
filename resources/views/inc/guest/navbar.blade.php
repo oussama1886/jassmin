@@ -22,6 +22,7 @@
         <div class="col-lg-9">
             <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0">
                 <a href="" class="text-decoration-none d-block d-lg-none">
+                    <img class="rounded-circle" src="{{ asset("/dashassets/img/team/admin.jpeg") }}" alt="User-Profile-Image" width="60" height="60">
                     <h1 class="m-0 display-5 font-weight-semi-bold"><span class="text-primary font-weight-bold border px-3 mr-1">Jasmin</span>Shop</h1>
                 </a>
                 <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
@@ -31,7 +32,7 @@
                     <div class="navbar-nav mr-auto py-0">
 
                     </div>
-                    <div class="col-lg-5 col-3" style="margin-top: -80px; margin-right: -420px; margin-left:0px;">
+                    <div class="col-lg-5 col-3" style="margin-top: -155px; margin-right: -420px; margin-left:0px;">
                         <div class=" text-left">
 
 
@@ -46,9 +47,10 @@
                         </form>
                     </div>
                 @else
-                <div class="col-lg-1 col-2" style="margin-top: 0px; margin-right: -420px; margin-left:-100px; display: flex; align-items: center;">
-                    <a href="/login" class="btn border nav-item nav-link" style="margin-right: 10px;">Login</a>
-                    <a href="/register" class="btn border nav-item nav-link">Register</a>
+                <div class="col-lg-9 col-4" style="margin-top: 0px; margin-right: -480px; margin-left:-220px; display: flex; align-items: center;">
+
+                    <a href="/login" class="btn border nav-item nav-link" style="margin-right: 10px;">connexion</a>
+                    <a href="/register" class="btn border nav-item nav-link">Créer un compte</a>
                 </div>
 
                 @endauth
@@ -64,9 +66,9 @@
                         <img class="img-fluid" src="{{asset('mainassets/img/carousel-1.webp')}}" alt="Carousel Image">
                         <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                             <div class="p-3" style="max-width: 700px;">
-                                <h4 class="text-light text-uppercase font-weight-medium mb-3">10% Off Your First Order</h4>
-                                <h3 class="display-4 text-white font-weight-semi-bold mb-4">Fashionable Dress</h3>
-                                <a href="" class="btn btn-light py-2 px-3">Shop Now</a>
+                                <h4 class="text-light text-uppercase font-weight-medium mb-3">Solde chaque mois</h4>
+                                <h3 class="display-4 text-white font-weight-semi-bold mb-4">Robe tendance</h3>
+                                <a href="" class="btn btn-light py-2 px-3">Commander maintenant</a>
                             </div>
                         </div>
                     </div>
@@ -74,9 +76,9 @@
                         <img class="img-fluid" src="{{asset('mainassets/img/carousel-2.jpg')}}" alt="Image">
                         <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                             <div class="p-3" style="max-width: 700px;">
-                                <h4 class="text-light text-uppercase font-weight-medium mb-3">10% Off Your First Order</h4>
-                                <h3 class="display-4 text-white font-weight-semi-bold mb-4">Reasonable Price</h3>
-                                <a href="" class="btn btn-light py-2 px-3">Shop Now</a>
+                                <h4 class="text-light text-uppercase font-weight-medium mb-3">Solde chaque mois</h4>
+                                <h3 class="display-4 text-white font-weight-semi-bold mb-4">Robe tendance</h3>
+                                <a href="" class="btn btn-light py-2 px-3">Commander maintenant</a>
                             </div>
                         </div>
                     </div>

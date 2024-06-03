@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\ProductController;
 
 use App\Http\Controllers\ChartJSController;
 
@@ -70,6 +70,14 @@ Route::get('/home', 'App\Http\Controllers\ProductController@index');
 Route::post('/client/review/store', 'App\Http\Controllers\clientController@addReview')->middleware('auth','is_active');
 
 
+
+
+Route::get('/products/latest/{category?}', [ProductController::class, 'sortByLatest'])->name('products.latest');
+Route::get('/products/best-rating/{category?}', [ProductController::class, 'sortByBestRating'])->name('products.best-rating');
+
+
+
+
 Route::post('/client/order/store', 'App\Http\Controllers\CommandeController@store')/* ->middleware('auth','is_active') */;
 Route::post('/client/order/store1', 'App\Http\Controllers\CommandeController@store1')/* ->middleware('auth','is_active') */;
 Route::post('/remove-from-cart', 'App\Http\Controllers\CommandeController@remove');
@@ -100,7 +108,7 @@ Route::get('/admin/categories','App\Http\Controllers\CategoryController@index')-
 Route::post('/admin/categories/store','App\Http\Controllers\CategoryController@store')->middleware('auth','admin');
 
 
-
+/* Route::get('products/lastest/{{ $id}}/show','App\Http\Controllers\GuestController@sortByLatest'); */
 Route::get('/admin/categories/{id}/delete','App\Http\Controllers\CategoryController@destroy')->middleware('auth','admin');
 
 Route::post('/admin/categories/update','App\Http\Controllers\CategoryController@update')->middleware('auth','admin');
@@ -110,7 +118,7 @@ Route::post('/admin/categories/update','App\Http\Controllers\CategoryController@
 
 // route product
 // liste de produit /admin/products
-Route::get('/admin/products','App\Http\Controllers\ProductController@index')->middleware('auth','admin');
+Route::get('/admin/products','App\Http\Controllers\ProductController@index1')->middleware('auth','admin');
 Route::get('/admin/tabbord/vprod','App\Http\Controllers\AdminController@calculateSum')->middleware('auth','admin');
 Route::get('/admin/tabbord/vmois','App\Http\Controllers\AdminController@calculateSum1')->middleware('auth','admin');
 Route::get('/admin/tabbord/chiffre','App\Http\Controllers\AdminController@calculateSum2')->middleware('auth','admin');

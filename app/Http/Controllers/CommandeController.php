@@ -280,6 +280,42 @@ public function remove(Request $request)
     // Récupérer le panier de la session
     $cart = session()->get('cart', []);
 
+    // Trouver la clé exacte du produit dans le panier
+    $itemKey = null;
+    foreach ($cart as $key => $item) {
+        if ($item['product_id'] == $productId) {
+            $itemKey = $key;
+            break;
+        }
+    }
+
+    // Vérifier si l'article correspondant à $productId existe dans le panier
+    if ($itemKey !== null) {
+        // Supprimer l'article du panier
+        unset($cart[$itemKey]);
+        // Ajouter un message de confirmation
+        session()->flash('success', 'Produit supprimé du panier avec succès.');
+    } else {
+        // Ajouter un message d'erreur
+        session()->flash('error', 'Produit introuvable dans le panier.');
+    }
+
+    // Mettre à jour le panier dans la session
+    session()->put('cart', $cart);
+
+    // Retourner la vue avec le panier mis à jour
+    return view('guest.cart1', ['cart' => $cart]);
+}
+
+
+public function remove1(Request $request)
+{/* dd($request->all()); */
+    // Récupérer la clé du produit à supprimer
+    $productId = $request->input('product_id');
+  /*   dd($productId); */
+    // Récupérer le panier de la session
+    $cart = session()->get('cart', []);
+    dd($cart);
     // Vérifier si l'article correspondant à $productId existe dans le panier
     if(array_key_exists($productId, $cart)) {
         // Supprimer l'article du panier

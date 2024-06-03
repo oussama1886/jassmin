@@ -17,14 +17,14 @@ Dimanche: 09h00 à 15h00</p>
         <div class="col-lg-8 col-md-12">
             <div class="row">
                 <div class="col-md-4 mb-5">
-                    <h5 class="font-weight-bold text-dark mb-4">Quick Links</h5>
+                    <h5 class="font-weight-bold text-dark mb-4">Liens rapides</h5>
                     <div class="d-flex flex-column justify-content-start">
-                        <a class="text-dark mb-2" href="/"><i class="fa fa-angle-right mr-2"></i>Home</a>
+                        <a class="text-dark mb-2" href="/"><i class="fa fa-angle-right mr-2"></i>Acceuil</a>
 
                         <a class="text-dark mb-2" href="/guest/livraison"><i class="fa fa-angle-right mr-2"></i>livraison</a>
 
 
-                        <a class="text-dark mb-2" href="/guest/contact"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
+                        <a class="text-dark mb-2" href="/guest/contact"><i class="fa fa-angle-right mr-2"></i>Contactez-nous</a>
                         <a class="text-dark mb-2" href="/guest/apropos"><i class="fa fa-angle-right mr-2"></i>A propos</a>
                     </div>
                 </div>

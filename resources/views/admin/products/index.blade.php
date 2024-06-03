@@ -84,7 +84,7 @@
                                         <th scope="col" _msttexthash="94367" _msthash="330">Image principale produit</th>
                                         <th scope="col" _msttexthash="94367" _msthash="330">Image 1 produit</th>
                                         <th scope="col" _msttexthash="94367" _msthash="330">Image 2 produit</th>
-                                        <th scope="col" _msttexthash="73463" _msthash="331">Actions</th>
+                                        <th scope="col" _msttexthash="73463" _msthash="331" class="text-center"> <td class="text-center">Actions</td></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -106,10 +106,28 @@
 
                                                 <td><img src="{{ asset('uploads') }}/{{ $p->imag_two }}" width="80" alt=""></td>
                                                 <td>
-                                            <a data-bs-toggle="modal" data-bs-target="#updateModal" data-id="{{ $p->id }}" class="btn btn-success">Modifier</a>
-                                            <a onclick="return confirm('Voulez-vous supprimer cet produit: {{ $p->name }}')"
-                                                href="/admin/product/{{ $p->id }}/delete" class="btn btn-danger">Supprimer</a>
-                                        <a href="{{ route('sizeColor', ['product_id' => $p->id]) }}" class="btn btn-primary" > Size/Color</a>
+                                                    <td class="text-center">
+                                                       {{--  <div class="row justify-content-center"> --}}
+                                                            <div class="col-9">
+                                                            <a data-bs-toggle="modal" data-bs-target="#updateModal" data-id="{{ $p->id }}" class="btn btn-success btn-sm btn-block">Modifier</a>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            @if ($p->archived)
+                                                            <a onclick="return confirm('Voulez-vous désarchiver ce produit: {{ $p->name }}')"
+                                                               href="/admin/product/{{ $p->id }}/unarchive" class="btn btn-warning btn-sm btn-block">Désarchiver</a>
+                                                        @else
+                                                            <a onclick="return confirm('Voulez-vous archiver ce produit: {{ $p->name }}')"
+                                                               href="/admin/product/{{ $p->id }}/archive" class="btn btn-warning btn-sm btn-block">Archiver</a>
+                                                        @endif
+                                                        </div>
+                                                        <div class="col-9">
+                                                            <a onclick="return confirm('Voulez-vous supprimer cet produit: {{ $p->name }}')" href="/admin/product/{{ $p->id }}/delete" class="btn btn-danger btn-sm btn-block">Supprimer</a>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <a href="{{ route('sizeColor', ['product_id' => $p->id]) }}" class="btn btn-primary btn-sm btn-block">Size/Color</a>
+                                                        </div>
+                                                 {{--    </div> --}}
+
                                         </td>
                                     </tr>
                                     @endforeach
@@ -295,6 +313,7 @@
 
 
 <!-- Modal d'update de produit -->
+
 <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -306,84 +325,68 @@
                 @csrf
                 <div class="modal-body">
 
-                    <input name = "id" id="update_id" type="hidden">
+                    <input name="id" id="update_id" type="hidden">
 
-                    <div class="modal-body">
-                        <img src="" id="update_product_image" width="80" alt="Image du produit">
-                        <!-- Autres champs de mise à jour du produit -->
+                    <div class="mb-3">
+                        <img src="" id="update_product_image_display" width="80" alt="Image du produit">
+                        <img src="" id="update_image_one_display" width="80" alt="Image 1 du produit">
+                        <img src="" id="update_image_two_display" width="80" alt="Image 2 du produit">
                     </div>
-
 
                     <div class="mb-3">
                         <label for="update_name" class="form-label">Nom du produit</label>
                         <input type="text" class="form-control" id="update_name" name="name" placeholder="Nom du produit">
-
                     </div>
 
                     <div class="mb-3">
-                        <label for="update_Details" class="form-label">Details technique du produit</label>
-                        <textarea class="form-control" id="update_details" name="details"
-                            placeholder="Entrez la details technique du produit" required></textarea>
+                        <label for="update_details" class="form-label">Détails technique du produit</label>
+                        <textarea class="form-control" id="update_details" name="details" placeholder="Entrez les détails techniques du produit" required></textarea>
                     </div>
 
                     <div class="mb-3">
                         <label for="update_description" class="form-label">Description du produit</label>
-                        <textarea class="form-control" id="update_description" name="description"
-                            placeholder="Description du produit"></textarea>
+                        <textarea class="form-control" id="update_description" name="description" placeholder="Description du produit"></textarea>
                     </div>
+
                     <div class="mb-3">
                         <label for="update_price" class="form-label">Prix du produit</label>
-                        <input type="number" class="form-control" id="update_price" name="price"
-                            placeholder="Prix du produit">
-                    </div>
-
-
-                    <div class="mb-3">
-                        <label for="update_purchase_price" class="form-label">Prix d'achat produit</label>
-                        <input type="number" class="form-control" id="update_purchase_price" name="purchase_price" placeholder="Prix d'achat produit">
+                        <input type="number" class="form-control" id="update_price" name="price" placeholder="Prix du produit">
                     </div>
 
                     <div class="mb-3">
-                        <label for="update_oldprice" class="form-label">Ancien prix produit</label>
-                        <input type="number" class="form-control" id="update_oldprice" name="old_price"
-                            placeholder="modifier l'ancien prix du produit" >
+                        <label for="update_purchase_price" class="form-label">Prix d'achat du produit</label>
+                        <input type="number" class="form-control" id="update_purchase_price" name="purchase_price" placeholder="Prix d'achat du produit">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="update_old_price" class="form-label">Ancien prix du produit</label>
+                        <input type="number" class="form-control" id="update_old_price" name="old_price" placeholder="Modifier l'ancien prix du produit">
                     </div>
 
                     <div class="mb-3">
                         <label for="update_qte" class="form-label">Quantité du produit</label>
-                        <input type="number" class="form-control" id="update_qte" name="qte"
-                            placeholder="Quantité du produit">
+                        <input type="number" class="form-control" id="update_qte" name="qte" placeholder="Quantité du produit">
                     </div>
 
-
                     <div class="mb-3">
-                        <label for="productimage" class="form-label">modifier image du produit</label>
-                        <input type="file" class="form-control" id="update_product_image" name="photo"
-                            placeholder="choisir image du produit">
-                            @error('photo')
-                            <div class="alert alert-danger">
-                                {{ $message }}
-                            </div>
+                        <label for="update_photo" class="form-label">Modifier l'image du produit</label>
+                        <input type="file" class="form-control" id="update_photo" name="photo" placeholder="Choisir l'image du produit">
+                        @error('photo')
+                            <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                     </div>
 
                     <div class="mb-3">
-                        <label for="productimage" class="form-label">modifier image 1 du produit</label>
-                        <input type="file" class="form-control" id="update_imag_one" name="imag_one"
-                            placeholder="modifier l'image 1 du produit">
-
-                        </div>
-
+                        <label for="update_imag_one" class="form-label">Modifier l'image 1 du produit</label>
+                        <input type="file" class="form-control" id="update_imag_one" name="imag_one" placeholder="Modifier l'image 1 du produit">
+                    </div>
 
                     <div class="mb-3">
-                        <label for="productimage" class="form-label">modifier image 2 du produit</label>
-                        <input type="file" class="form-control" id="update_imag_two" name="imag_two"
-                            placeholder="modfier l'image 2 du produit" required>
-
-                        </div>
+                        <label for="update_imag_two" class="form-label">Modifier l'image 2 du produit</label>
+                        <input type="file" class="form-control" id="update_imag_two" name="imag_two" placeholder="Modifier l'image 2 du produit">
+                    </div>
                 </div>
                 <div class="modal-footer">
-
                     <button class="btn btn-primary" type="submit">D’accord</button>
                     <button class="btn btn-outline-primary" type="button" data-bs-dismiss="modal">Annuler</button>
                 </div>
@@ -393,41 +396,45 @@
 </div>
 
 
+
 <script src="{{ asset('dashassets/js/phoenix.js') }}"></script>
 <script src="{{ asset('dashassets/js/ecommerce-dashboard.js') }}"></script>
 <script src="{{ asset('assets/js/jquery-3.7.1.min.js') }}" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 <script>
-   $(document).ready(function() {
+    $(document).ready(function() {
+        var data = @json($products);
 
-    var data = @json($products);
+        $(document).on('show.bs.modal', '#updateModal', function(event) {
+            var triggerLink = $(event.relatedTarget);
+            var id = triggerLink.data('id');
 
-    $(document).on('show.bs.modal', '#updateModal', function(event) {
-        var triggerLink = $(event.relatedTarget);
-        var id = triggerLink.data('id');
+            var dataArray = Array.from(data.data);
+            var product = dataArray.find(function(p) {
+                return p.id === id;
+            });
 
-        var dataArray = Array.from(data.data);
-        console.log(dataArray)
-        var product = dataArray.find(function(p) {
-        return p.id === id;
+            $('#update_id').val(product.id);
+            $('#update_name').val(product.name);
+            $('#update_details').val(product.details);
+            $('#update_description').val(product.description);
+            $('#update_price').val(product.price);
+            $('#update_purchase_price').val(product.purchase_price);
+            $('#update_old_price').val(product.old_price);
+            $('#update_qte').val(product.qte);
+            $('#update_product_image_display').attr('src', '{{ asset('uploads') }}/' + product.photo);
+            $('#update_image_one_display').attr('src', '{{ asset('uploads') }}/' + product.imag_one);
+            $('#update_image_two_display').attr('src', '{{ asset('uploads') }}/' + product.imag_two);
         });
-
-        $('#update_id').val(product['id']);
-        $('#update_name').val(product.name);
-        $('#update_details').val(product.details);
-        $('#update_description').val(product.description);
-        $('#update_price').val(product.price);
-        $('#update_purchase_price').val(product.purchase_price);
-        $('#update_old_price').val(product.old_price);
-        $('#update_qte').val(product.qte);
-        // Set the src attribute of the image element to update the product image
-        $('#update_product_image').attr('src', '{{ asset('uploads') }}/' + product.photo);
-        $('#update_imag_one').attr('src', '{{ asset('uploads') }}/' + product.imag_one);
-        $('#update_imag_two').attr('src', '{{ asset('uploads') }}/' + product.imag_two);
     });
-});
+    </script>
 
-</script>
 
 </body>
 
 </html>
+
+
+
+
+
+

@@ -27,6 +27,32 @@
             padding: 5px 10px;
             line-height: 1;
         }
+        {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 100vw;
+            overflow-x: hidden;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 100%;
+            width: 100%;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header, .content, .footer {
+            width: 100%;
+            padding: 20px;
+            background-color: #f4f4f4;
+            margin-bottom: 10px;
+        }
+
     </style>
     <!-- Favicon -->
     <link href="img/favicon.ico" rel="icon">
@@ -62,25 +88,25 @@
             <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
                 <div class="d-flex align-items-center border mb-4" style="padding: 30px;">
                     <h1 class="fa fa-check text-primary m-0 mr-3"></h1>
-                    <h5 class="font-weight-semi-bold m-0">Quality Product</h5>
+                    <h5 class="font-weight-semi-bold m-0">Produit de qualité</h5>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
                 <div class="d-flex align-items-center border mb-4" style="padding: 30px;">
                     <h1 class="fa fa-shipping-fast text-primary m-0 mr-2"></h1>
-                    <h5 class="font-weight-semi-bold m-0">Free Shipping</h5>
+                    <h5 class="font-weight-semi-bold m-0">Livraison rapide</h5>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
                 <div class="d-flex align-items-center border mb-4" style="padding: 30px;">
                     <h1 class="fas fa-exchange-alt text-primary m-0 mr-3"></h1>
-                    <h5 class="font-weight-semi-bold m-0">14-Day Return</h5>
+                    <h5 class="font-weight-semi-bold m-0">14 jours pour retourner le produit</h5>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
                 <div class="d-flex align-items-center border mb-4" style="padding: 30px;">
                     <h1 class="fa fa-phone-volume text-primary m-0 mr-3"></h1>
-                    <h5 class="font-weight-semi-bold m-0">24/7 Support</h5>
+                    <h5 class="font-weight-semi-bold m-0">Support 24/7 </h5>
                 </div>
             </div>
         </div>
@@ -102,7 +128,7 @@
     <!-- Products Start -->
     <div class="container-fluid pt-5">
         <div class="text-center mb-4">
-            <h2 class="section-title px-5"><span class="px-2">Trandy Products</span></h2>
+            <h2 class="section-title px-5"><span class="px-2">Produits à la mode</span></h2>
         </div>
         <div class="row px-xl-5 pb-3">
             @foreach ($produits as $p)
@@ -123,33 +149,7 @@
                     </div>
                     <div class="card-footer d-flex justify-content-between bg-light border align-items-center">
                         <a href="/product/details/{{ $p->id }}" class="btn btn-sm text-dark p-0">
-                            <i class="fas fa-eye text-primary mr-1"></i>View Detail</a>
-
-
-
-
-                          {{--   <form action="/client/order/store" method="POST">
-                                @csrf
-                                <div class="d-flex align-items-center mb-4 pt-2">
-                                    <input type="hidden" value="{{ $p->id }}" name="product">
-                                    <div class="input-group quantity mr-1" style="width: 120px;">
-                                        <div class="input-group-prepend">
-                                            <button type="button" class="btn btn-primary btn-minus" onclick="decrementQuantity('{{ $p->id }}')">
-                                                <i class="fas fa-caret-down"></i>
-                                            </button>
-                                        </div>
-                                        <input type="text" class="form-control bg-secondary text-center" value="1" name="qte" readonly>
-                                        <div class="input-group-append">
-                                            <button type="button" class="btn btn-primary btn-plus" onclick="incrementQuantity('{{ $p->id }}')">
-                                                <i class="fas fa-caret-up"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <button type="submit" class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i></button>
-                                </div>
-                            </form> --}}
-
-
+                            <i class="fas fa-eye text-primary mr-1"></i>Voir les détails</a>
 
                     </div>
                 </div>

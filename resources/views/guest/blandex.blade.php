@@ -100,7 +100,7 @@
                         <div class="d-flex align-items-center"><span class="nav-link-text">Sign up</span></div>
                       </a></li>
                     <li class="nav-item"><a class="nav-link" href="pages/authentication/simple/sign-out.html" data-bs-toggle="" aria-expanded="false">
-                        <div class="d-flex align-items-center"><span class="nav-link-text">Sign out</span></div>
+                        <div class="d-flex align-items-center"><span class="nav-link-text">Signnnnnnnnnnnnnnn out</span></div>
                       </a></li>
                     <li class="nav-item"><a class="nav-link" href="pages/authentication/simple/forgot-password.html" data-bs-toggle="" aria-expanded="false">
                         <div class="d-flex align-items-center"><span class="nav-link-text">Forgot password</span></div>

@@ -52,10 +52,11 @@
   </style>
 </head>
 <body>
+
   <div class="container">
 
     <div class="row align-items-center py-3 px-xl-5">
-
+   <img  src="{{ asset("/dashassets/img/team/jasminshop.png") }}" alt="User-Profile-Image" width="150" height="120">
             <a href="http://jasminshop.test" class="text-decoration-none">
                 <h1 class="m-0 display-5 font-weight-semi-bold"><span class="text-primary font-weight-bold border px-3 mr-1">Jasmin</span>Shop</h1>
             </a>

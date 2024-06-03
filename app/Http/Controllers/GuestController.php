@@ -119,6 +119,25 @@ public function affichersize(Request $request){
         return view('guest.shop', compact('cat', 'categories', 'product', 'produits'));
     }
 
+    public function sortByLatest($category)
+    {
+        $query = Product::orderBy('created_at', 'desc');
+        if ($category) {
+            $query->where('category_id', $category);
+        }
+        $products = $query->get();
+        return view('guest.shop', compact('products'));
+    }
 
+
+    public function sortByBestRating($category = null)
+    {
+        $query = Product::orderBy('rating', 'desc');
+        if ($category) {
+            $query->where('category_id', $category);
+        }
+        $products = $query->get();
+        return view('guest.shop', compact('products'));
+    }
 
 }

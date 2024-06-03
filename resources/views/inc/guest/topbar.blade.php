@@ -32,17 +32,20 @@ connectez-vous
     </div>
 
     <div class="row align-items-center py-3 px-xl-5">
-        <div class="col-lg-3 d-none d-lg-block">
+        <div class="col-lg-5 d-none d-lg-block">
             <a href="http://jasminshop.test" class="text-decoration-none">
+
                 <h1 class="m-0 display-5 font-weight-semi-bold">
+                    <img  src="{{ asset("/dashassets/img/team/jasminshop.png") }}" alt="User-Profile-Image" width="150" height="120">
                     <span class="text-primary font-weight-bold boconnectez rder px-3 mr-1">Jasmin</span>Shop</h1>
+
             </a>
         </div>
         <div class="col-lg-4 col-4 text-left">
             <form id="searchForm" action="/product/search" method="POST">
                 @csrf
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for products" name="keywords">
+                    <input type="text" class="form-control" placeholder="Rechercher des produits" name="keywords">
                     <div class="input-group-append">
                         <span class="input-group-text bg-transparent text-primary" id="searchIcon">
                             <i class="fa fa-search"></i>

@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>EShopper - Bootstrap Shop Template</title>
+    <title>Jasmin Shop</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
@@ -24,6 +24,33 @@
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="{{ asset ('mainassets/css/style.css') }}" rel="stylesheet">
+    <style>
+        {
+                    margin: 0;
+                    padding: 0;
+                    box-sizing: border-box;
+                }
+
+                body {
+                    width: 100vw;
+                    overflow-x: hidden;
+                    font-family: Arial, sans-serif;
+                }
+
+                .container {
+                    max-width: 100%;
+                    width: 100%;
+                    margin: 0 auto;
+                    padding: 20px;
+                }
+
+                .header, .content, .footer {
+                    width: 100%;
+                    padding: 20px;
+                    background-color: #f4f4f4;
+                    margin-bottom: 10px;
+                }
+                </style>
 </head>
 
 <body>
@@ -31,13 +58,7 @@
     <div class="container-fluid">
         <div class="row bg-secondary py-2 px-xl-5">
             <div class="col-lg-6 d-none d-lg-block">
-                <div class="d-inline-flex align-items-center">
-                    <a class="text-dark" href="">FAQs</a>
-                    <span class="text-muted px-2">|</span>
-                    <a class="text-dark" href="">Help</a>
-                    <span class="text-muted px-2">|</span>
-                    <a class="text-dark" href="">Support</a>
-                </div>
+
             </div>
             <div class="col-lg-6 text-center text-lg-right">
                 <div class="d-inline-flex align-items-center">
@@ -104,11 +125,11 @@
  <!-- Page Header Start -->
  <div class="container-fluid bg-secondary mb-5">
     <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
-        <h1 class="font-weight-semi-bold text-uppercase mb-3">Shopping Cart</h1>
+        <h1 class="font-weight-semi-bold text-uppercase mb-3">PANIER</h1>
         <div class="d-inline-flex">
-            <p class="m-0"><a href="">Home</a></p>
+            <p class="m-0"><a href="">Acceuil</a></p>
             <p class="m-0 px-2">-</p>
-            <p class="m-0">Shopping Cart</p>
+            <p class="m-0">PANIER</p>
         </div>
     </div>
 </div>
@@ -120,14 +141,14 @@
             <thead class="bg-secondary text-dark">
                 <tr>
 
-                    <th>Products</th>
+                    <th>Produits</th>
                   {{--   <th> product_id</th> --}}
 
                     <th>taille</th>
                     <th>couleur</th>
-                     <th>Price</th>
-                    <th>Quantity</th>
-                    <th>Remove</th>
+                     <th>Prix</th>
+                    <th>Quantité</th>
+                    <th>suppression</th>
 
                     {{--  <th>Total</th>
                     <th>Remove</th> --}}
@@ -161,7 +182,7 @@
                             <form action="/remove-from-cart" method="POST">
                                 @csrf
                                 <input type="hidden" name="product_id" value="{{ $item['product_id'] }}">
-                                <button type="submit" class="btn btn-danger btn-sm">Remove</button>
+                                <button type="submit" class="btn btn-danger btn-sm">supprimer</button>
                             </form>
 
                         </td>
@@ -177,35 +198,33 @@
 <div>
 
     @auth
-        <a href="" class="btn border">
-            <i class="fas fa-user text-primary"></i>
-            <span class="badge">
-                @if(auth()->user())
 
+    <div class="col p-3 text-center text-white d-flex align-items-center justify-content-center">
+        <i class="text-primary"></i>
+        <span class="badge">
+            @if(auth()->user())
+            <form action="/client/order/store1" method="POST" id="order-form">
+                @csrf
+                @foreach(session('cart', []) as $item)
+                <input type="hidden" name="products[{{ $loop->index }}][product_id]" value="{{ $item['product_id'] }}">
+                <input type="hidden" name="products[{{ $loop->index }}][size]" value="{{ $item['size'] }}">
+                <input type="hidden" name="products[{{ $loop->index }}][color]" value="{{ $item['color'] }}">
+                <input type="hidden" name="products[{{ $loop->index }}][qte]" value="{{ $item['qte'] }}">
+                @endforeach
+                <input type="hidden" value="{{ Auth::user()->id }}" name="client_id">
+                <button type="submit" class="btn btn-block btn-primary my-3 py-3">voir le montant globale</button>
+            </form>
+            @endif
+        </span>
+    </div>
 
-
-                <form action="/client/order/store1" method="POST" id="order-form">
-                    @csrf
-                    @foreach(session('cart', []) as $item)
-                        <input type="hidden" name="products[{{ $loop->index }}][product_id]" value="{{ $item['product_id'] }}">
-                        <input type="hidden" name="products[{{ $loop->index }}][size]" value="{{ $item['size'] }}">
-                        <input type="hidden" name="products[{{ $loop->index }}][color]" value="{{ $item['color'] }}">
-                        <input type="hidden" name="products[{{ $loop->index }}][qte]" value="{{ $item['qte'] }}">
-                    @endforeach
-                    <input type="hidden" value="{{ Auth::user()->id }}" name="client_id">
-                    <button type="submit" class="btn btn-block btn-primary my-3 py-3">voir le montant globale</button>
-                </form>
-
-{{-- {{ dd(session('cart', [])) }} --}}
-
-                @endif
-            </span>
-        </a>
-
-</div>
  @else
- <div class="login-button">
-   <a href="/login" type="submit"class="btn btn-block btn-primary my-3 py-3">connectez ici pour finir votre commande</a>
+ <div class="row justify-content-center">
+    <div class="col-md-6 col-lg-4">
+        <div class="login-button text-center">
+            <a href="/login" class="btn btn-block btn-primary my-3 py-3">Connectez ici pour finir votre commande</a>
+        </div>
+    </div>
 </div>
 
 

@@ -18,7 +18,7 @@
                         <!-- Navigation links -->
                     </div>
                     <!-- Bouton "Sign out" -->
-                    <div class="col-lg-5 col-3" style="margin-top: -155px;">
+                    <div class="col-lg-5 col-3" style="margin-top: -234px;">
                         <div class="text-right">
                             @auth
                             <!-- Si l'utilisateur est connecté -->
@@ -34,7 +34,7 @@
                             @else
                             <!-- Si l'utilisateur n'est pas connecté -->
                             <div class="d-flex justify-content-end">
-                                <a href="/login" class="btn border nav-item nav-link" style="margin-right: 10px;">connexion</a>
+                                <a href="/login" class="btn border nav-item nav-link" style="margin-right: 10px;">Connexion</a>
                                 <a href="/register" class="btn border nav-item nav-link">Créer un compte</a>
                             </div>
                             @endauth

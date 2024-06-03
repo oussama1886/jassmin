@@ -16,15 +16,21 @@ class ProductController extends Controller
     //fonction index pour afficher la liste de produit
     public function index()
     {
+        $produits = Product::where('qte', '>', 0)->paginate(12); // Retrieve all products from the database where quantity > 0
+        $categories = Category::all(); // Retrieve all categories from the database
+        return view('guest.home', compact('produits', 'categories')); // Pass these data to the 'home' view
+    }
+    //fonction index pour afficher la liste de produit
+    public function index1()
+    {
         // Retrieve all products from the database
         $products = Product::paginate(10);
         $categories= Category::all();
         // Pass the products data to the index view
-       return view('admin.products.index', compact('products', 'categories'));
+      return view('admin.products.index', compact('products', 'categories'));
 
-       //return view('home', compact('products', 'categories'));
+
     }
-
 
 
 
@@ -142,33 +148,24 @@ class ProductController extends Controller
         $product->purchase_price = $request->purchase_price;
         $product->qte = $request->qte;
         $product->old_price = $request->old_price;
+
         // Mettre à jour la photo du produit si une nouvelle photo est téléchargée
-      // Mettre à jour la photo du produit si une nouvelle photo est téléchargée
-if ($request->hasFile('photo')) {
-    // Supprimer l'ancienne photo du produit
-    $this->deleteFile($product->photo);
+        if ($request->hasFile('photo')) {
+            $this->deleteFile($product->photo);
+            $product->photo = $this->uploadFile($request->file('photo'));
+        }
 
-    // Télécharger la nouvelle photo du produit
-    $product->photo = $this->uploadFile($request->file('photo'));
-}
+        // Mettre à jour img1 du produit si une nouvelle image est téléchargée
+        if ($request->hasFile('imag_one')) {
+            $this->deleteFile($product->imag_one);
+            $product->imag_one = $this->uploadFile($request->file('imag_one'));
+        }
 
-// Mettre à jour img1 du produit si une nouvelle image est téléchargée
-if ($request->hasFile('imag_one')) {
-    // Supprimer l'ancienne image img1 du produit
-    $this->deleteFile($product->imag_one);
-
-    // Télécharger la nouvelle image img1 du produit
-    $product->imag_one = $this->uploadFile($request->file('imag_one'));
-}
-
-// Mettre à jour img2 du produit si une nouvelle image est téléchargée
-if ($request->hasFile('imag_two')) {
-    // Supprimer l'ancienne image img2 du produit
-    $this->deleteFile($product->imag_two);
-
-    // Télécharger la nouvelle image img2 du produit
-    $product->imag_two = $this->uploadFile($request->file('imag_two'));
-}
+        // Mettre à jour img2 du produit si une nouvelle image est téléchargée
+        if ($request->hasFile('imag_two')) {
+            $this->deleteFile($product->imag_two);
+            $product->imag_two = $this->uploadFile($request->file('imag_two'));
+        }
 
         // Enregistrer les modifications du produit dans la base de données
         if ($product->save()) {
@@ -177,6 +174,7 @@ if ($request->hasFile('imag_two')) {
             return redirect()->back()->with('error', 'Failed to update product');
         }
     }
+
 
     // Méthode pour supprimer un fichier
   // Méthode pour supprimer un fichier
@@ -377,3 +375,6 @@ public function size_color($product_id)
 
 
 }
+
+
+

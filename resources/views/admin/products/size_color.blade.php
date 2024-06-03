@@ -1,5 +1,5 @@
 
-@include('inc.admin.nav')
+{{-- @include('inc.admin.nav') --}}
 @extends('layouts.app')
 
 @section('content')

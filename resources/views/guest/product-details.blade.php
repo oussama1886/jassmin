@@ -24,6 +24,33 @@
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="{{ asset ('mainassets/css/style.css') }}" rel="stylesheet">
+    <style>
+{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 100vw;
+            overflow-x: hidden;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 100%;
+            width: 100%;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header, .content, .footer {
+            width: 100%;
+            padding: 20px;
+            background-color: #f4f4f4;
+            margin-bottom: 10px;
+        }
+        </style>
 </head>
 
 <body>
@@ -42,11 +69,11 @@
     <!-- Page Header Start -->
     <div class="container-fluid bg-secondary mb-5">
         <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
-            <h1 class="font-weight-semi-bold text-uppercase mb-3">Shop Detail</h1>
+            <h1 class="font-weight-semi-bold text-uppercase mb-3">Détail</h1>
             <div class="d-inline-flex">
-                <p class="m-0"><a href="http://jasminshop.test">Home</a></p>
+                <p class="m-0"><a href="http://jasminshop.test">Acceuil</a></p>
                 <p class="m-0 px-2">-</p>
-                <p class="m-0">Shop Detail</p>
+                <p class="m-0">Détail</p>
             </div>
         </div>
     </div>
@@ -113,7 +140,7 @@
                     <h3 class="font-weight-semi-bold mb-4">Quantité restante : {{$product->qte}}</h3>
                 @endif
 
-                <p class="mb-4">{{$product->description}}</p>
+                <p class="mb-4">{{$product->details}}</p>
 
 
 
@@ -177,7 +204,7 @@
                         </div>
                        </div>
         <button type="submit" class="btn btn-primary px-3">
-            <i class="fa fa-shopping-cart mr-1"></i> Add To Cart
+            <i class="fa fa-shopping-cart mr-1"></i> Ajouter au Panier
         </button>
     </div>
 </form>
@@ -360,8 +387,8 @@
                                 @endforeach
                             </div>
                             <div class="col-md-6">
-                                <h4 class="mb-4">Leave a review</h4>
-                                <small>Your email address will not be published. Required fields are marked *<i class="fas fa-star"></i></small>
+                                <h4 class="mb-4">noter le produit</h4>
+
 
                                 <form action="/client/review/store" method="POST">
                                     @csrf
@@ -381,12 +408,12 @@
 
 
                                     <div class="form-group">
-                                        <label for="message">Your Review *</label>
+                                        <label for="message">votre commentaire *</label>
                                         <textarea  cols="30" rows="5" class="form-control" name="content"></textarea>
                                     </div>
 
                                     <div class="form-group mb-0">
-                                        <input type="submit" value="Leave Your Review" class="btn btn-primary px-3">
+                                        <input type="submit" value="Laisser votre commentaire" class="btn btn-primary px-3">
                                     </div>
                                 </form>
                             </div>
@@ -402,7 +429,7 @@
     <!-- Products Start -->
     <div class="container-fluid py-5">
         <div class="text-center mb-4">
-            <h2 class="section-title px-5"><span class="px-2">You May Also Like</span></h2>
+            <h2 class="section-title px-5"><span class="px-2">Vous pourriez aussi aimer</span></h2>
         </div>
         <div class="row px-xl-5">
             <div class="col">
@@ -410,10 +437,12 @@
                 <div class="owl-carousel related-carousel">
                     @foreach ($produits as $prod )
 
-
+@if ($prod->qte>0)
                     <div class="card product-item border-0">
                         <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                            <img class="img-fluid w-100"   src="{{asset('uploads')}}/{{$prod->photo}}" alt="">
+                            <a href="/product/details/{{ $prod->id }}">
+                                <img class="img-fluid w-100" src="{{ asset('uploads/'.$prod->photo) }}" alt="">
+                            </a>
                         </div>
                         <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
                             <h6 class="text-truncate mb-3">{{$prod->name}}</h6>
@@ -422,10 +451,11 @@
                             </div>
                         </div>
                         <div class="card-footer d-flex justify-content-between bg-light border">
-                            <a href="/product/details/{{ $prod->id }}" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>View Detail</a>
+                            <a href="/product/details/{{ $prod->id }}" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>Voir les détails</a>
                            {{--  <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a> --}}
                         </div>
                     </div>
+                    @endif
                     @endforeach
                 </div>
 
