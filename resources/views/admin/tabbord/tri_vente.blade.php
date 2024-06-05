@@ -41,7 +41,7 @@
             <div class="content">
                 <div class="pb-5">
                     <div class="row g-5">
-                        <h1> categories/produits </h1>
+                        <h1>  Les produits le plus vendus</h1>
 
                         <hr />
 

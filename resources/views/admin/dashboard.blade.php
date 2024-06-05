@@ -60,7 +60,7 @@
 
                             <h4 class="card-title" style="margin-right:150px;"><div>
 
-                                <h4>nombre de produit dont qte stockage inferieur a 20  : {{  $lowStockCount }}</h4>
+                                <h4>nombre de produit dont quantite stockage inferieur a 20  : {{  $lowStockCount }}</h4>
                                @else
                                <div class="card text-white bg-success">
                                 <div class="card-header"><i class="fa fa-user-plus"></i> commandes
@@ -77,7 +77,7 @@
                             </div>
 
                             <h4 class="card-title" style="margin-right:150px;"><div>
-                               <h4>pas de qte de stockage de produit inferieur a 20</h4>
+                               <h4>pas de quantite de stockage de produit inferieur a 20</h4>
                                @endif
                             </div></h4>
                         </div>
@@ -125,8 +125,8 @@
                                     <div style="position: absolute; left: -100px; top:45%; width: 206px; height: 8px; background-color: rgb(255, 255, 255); transform: rotate(-90deg);"></div>
                                 </div>
                             </div>
-                            <h4 class="card-title">le produit le plus vendus :{{ $maxProductId }} qte:{{ $maxQuantity }} </h4>
-                            <h4 class="card-title">le produit le moins vendus :{{ $minProductId }} qte:{{ $minQuantity }} </h4>
+                            <h4 class="card-title">le produit le plus vendus :{{ $maxProductId }} quantite :{{ $maxQuantity }} </h4>
+                            <h4 class="card-title">le produit le moins vendus :{{ $minProductId }} quantite :{{ $minQuantity }} </h4>
                         </div>
                         <a class="card-footer text-right" href="/admin/tabbord/tri_vente" style="color: white;">
                             More info <i class="fa fa-arrow-circle-right"></i>
