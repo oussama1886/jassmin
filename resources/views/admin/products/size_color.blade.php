@@ -12,7 +12,8 @@
             alert('Veuillez saisir une taille ou une couleur.');
             return false; // Empêcher l'envoi du formulaire
         }
-        return true; // Autoriser l'envoi du formulaire si une taille ou une couleur est saisie
+         // Autoriser l'envoi du formulaire si une taille ou une couleur est saisie
+        return true;
     }
 </script>
 @if(session('error'))
