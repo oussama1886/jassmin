@@ -301,8 +301,8 @@ public function remove(Request $request)
     }
 
     // Mettre à jour le panier dans la session
-    session()->put('cart', $cart);
-
+ /*    session()->put('cart', $cart); */
+    session(['cart' => $cart]);
     // Retourner la vue avec le panier mis à jour
     return view('guest.cart1', ['cart' => $cart]);
 }
@@ -323,8 +323,8 @@ public function remove1(Request $request)
     }
 
     // Mettre à jour le panier dans la session
-    session()->put('cart', $cart);
-
+   /*  session()->put('cart', $cart); */
+    session(['cart' => $cart]);
     // Rediriger l'utilisateur vers la page du panier après la suppression
     return view('guest.cart1', ['cart' => $cart]);
 }
